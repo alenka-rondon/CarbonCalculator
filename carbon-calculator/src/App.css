@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Open+Sans&family=Poppins:wght@300&display=swap');
+
+
+body {
+  background-color: #d6f1f7;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #545454;
+  font-family: 'Comfortaa', cursive;
+}
+
+.horizontal-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  margin: 20px 10vw 50px 10vw;
+}
+
+.vertical-div {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin: 20px 5vw 20px 5vw;
+}
+
+.title {
+  font-size: x-large;
+  
+}
+
+p {
+  margin: 20px 10vw 30px 10vw;
+  font-size: 20px;
+  line-height: 35px;
+}
