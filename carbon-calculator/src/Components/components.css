@@ -1,13 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@650&family=Open+Sans&family=Poppins:wght@350&display=swap');
 
-
-body {
-  background-color: #d6f1f7;
-  margin: 0 !important;
-  padding: 0 !important;
-  color: #545454;
-}
-
 .horizontal-div {
   display: flex;
   flex-direction: row;
