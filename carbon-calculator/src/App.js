@@ -59,7 +59,7 @@ function App() {
       question: 'How is your diet?',
       answers: [
         {answerText: 'Overly meat heavy', addVal: 0.8},
-        {answerText: 'Average omnivoe', addVal: 0},
+        {answerText: 'Average omnivore', addVal: 0},
         {answerText: 'No beef', addVal: -0.6},
         {answerText: 'Vegetarian', addVal: -0.8},
         {answerText: 'Vegan', addVal: -1},
@@ -89,28 +89,28 @@ function App() {
       question: 'How often do you travel in planes for over 4000km distances?',
       answers: [
         {answerText: 'Never', addVal: 0},
-        {answerText: '1 round-trip a year', addVal: 0.85},
-        {answerText: '2 round-trip a year', addVal: 1.7},
-        {answerText: '3 round-trip a year', addVal: 2.55},
-        {answerText: '4+ round-trip a year', addVal: 4},
+        {answerText: '1 round-trips a year', addVal: 0.85},
+        {answerText: '2 round-trips a year', addVal: 1.7},
+        {answerText: '3 round-trips a year', addVal: 2.55},
+        {answerText: '4+ round-trips a year', addVal: 4},
       ],
     }, {
       question: 'How often do you travel in planes for distances of 500 - 4000km?',
       answers: [
         {answerText: 'Never', addVal: 0},
-        {answerText: '1 round-trip a year', addVal: 0.4},
-        {answerText: '2 round-trip a year', addVal: 0.8},
-        {answerText: '3 round-trip a year', addVal: 1.2},
-        {answerText: '4+ round-trip a year', addVal: 2},
+        {answerText: '1 round-trips a year', addVal: 0.4},
+        {answerText: '2 round-trips a year', addVal: 0.8},
+        {answerText: '3 round-trips a year', addVal: 1.2},
+        {answerText: '4+ round-trips a year', addVal: 2},
       ],
     }, {
       question: 'How often do you travel in planes for distances of < 500 km?',
       answers: [
         {answerText: 'Never', addVal: 0},
-        {answerText: '1 round-trip a year', addVal: 0.07},
-        {answerText: '2 round-trip a year', addVal: 0.14},
-        {answerText: '3 round-trip a year', addVal: 0.21},
-        {answerText: '4+ round-trip a year', addVal: 0.3},
+        {answerText: '1 round-trips a year', addVal: 0.07},
+        {answerText: '2 round-trips a year', addVal: 0.14},
+        {answerText: '3 round-trips a year', addVal: 0.21},
+        {answerText: '4+ round-trips a year', addVal: 0.3},
       ],
     }
   ]
@@ -119,6 +119,7 @@ function App() {
   const[score, setScore] = useState(0);
   const[quizOver, setQuizOver] = useState(false);
   const[startPage, setStartPage] = useState(true);
+  const[trees, setTrees] = useState(0);
 
   const startQuiz = () => {
     setStartPage(false);
@@ -136,6 +137,7 @@ function App() {
 
     if (number === TOT_QS - 1) {
       setQuizOver(true);
+      setTrees(Math.round ((score / 0.07) * 100)/100);
       console.log("hi");
     } else {
       console.log("continue")
@@ -144,7 +146,7 @@ function App() {
 
   return (
     <body>
-      <div className="horizontal-div">
+      <div className="horizontal-div"  style={{marginTop: "40px", marginBottom: "40px"}}>
         <div>
           <img src={logo} width="130" height="130" alt="Logo"/>
         </div>
@@ -158,38 +160,41 @@ function App() {
         if (startPage) {
           return (
             <>
+             
+              <div className="vertical-div" style={{alignItems: "center"}}>
               <p>You have a say in your own life.  Through your everyday choices, you impact the world around you.  
               How much you cook, how often you travel, and how much of your day you spend commuting are just some of the ways 
               in which your life affects our world.</p>
-              <div className="vertical-div" style={{alignItems: "center", marginTop: "80px"}}>
-                <img src ={choices} width="800" height="100%" style={{objectFit: "contain", marginBottom: "20px"}} alt="Choices that impact carbon footprint"/>
+                <img src ={choices} width="800" height="100%" style={{objectFit: "contain", marginTop: "50px", marginBottom: "20px"}} alt="Choices that impact carbon footprint"/>
                 <p style={{marginTop: "10px"}}> Begin your journey into eco-friendliness by understanding how your life choices impacted your carbon footprint!</p>
-                <button><img src ={start} alt="Start Button" width="200" height="100%" style={{objectFit: "contain", marginTop: "10px"}} onClick={startQuiz}/></button>
+                <button className='start-btn'><img src ={start} alt="Start Button" width="200" height="100%" style={{objectFit: "contain", marginTop: "10px"}} onClick={startQuiz}/></button>
               </div>
             </>
           )
 
         } else if (quizOver) {
           return (
-            <p> Your Carbon Footprint so far: {score} tons of carbon dioxide annually</p>
+            <div className='final-screen'>
+              <p> Your total carbon footprint is : {score} tons of carbon dioxide annually</p>
+              <p> In order to offset your carbon footprint, you would require {trees} trees to sustain your lifestyle.</p>
+            </div>
           )
 
         } else {
           return (
-            <>
-            <p>Carbon Footprint so far: {score} tons of carbon dioxide annually</p>
-            <div>
+            <div className='vertical-div'>
               <p>Question: {number + 1} / {TOT_QS}</p>
-              <div className='horizontal-div'>
-                <p> {questions[number].question}</p>
+              <div className='question-banner'>
+                <p className = 'question'> {questions[number].question}</p>
                 <div className='vertical-div'>
                   {questions[number].answers.map((answers) => (
-                    <button onClick={() => nextQuestion(answers.addVal)}>{answers.answerText}</button>
+                    <button className='option-btn' onClick={() => nextQuestion(answers.addVal)}>{answers.answerText}</button>
                   ))}
                 </div>
               </div>
+            <p style={{width: "85vw", alignSelf: "center", backgroundColor: "#e7f6fa", border: "2px solid #e7f6fa", borderRadius: "20px", textAlign: "center"}}>
+              Carbon Footprint: <b> {score} tons </b> of carbon dioxide annually</p>
             </div>
-            </>
           )
         }
       })()}
